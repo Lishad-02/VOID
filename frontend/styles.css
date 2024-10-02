@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Login and Sign Up Page Styles */
+.login-page, .signup-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.836);
+    background-image: url("library-1.jpg");
+}
+.signup-page {
+    height: auto;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.781);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+h1 {
+    color: #fff;
+    font-family: 'Times New Roman', serif;
+    margin-bottom: 25px;
+}
+
+input[type="email"], input[type="password"], input[type="text"], input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    margin: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.signup {
+    margin-top: 20px;
+    color: #ddd;
+}
+
+.signup a {
+    color: lightblue;
+    text-decoration: underline;
+}
