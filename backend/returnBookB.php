@@ -1,119 +1,130 @@
-<?php
+<?php 
 session_start();
 
-
-$servername = "localhost"; 
-$username = "root"; 
-$password = ""; 
-$dbname = "void"; 
-
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Prepare response
-$response = [
-    'success' => false,
-    'message' => ''
-];
+date_default_timezone_set('Asia/Dhaka');
 
 // Check if the user is logged in
 if (!isset($_SESSION['email'])) {
-    $response['message'] = "You must log in first.";
-    echo json_encode($response);
-    exit;
+    header("Location: login.php");
+    exit();
 }
 
+// Handle the return book process
+if (isset($_POST['return'])) {
+    $book_id = $_POST['book_id'];
+    $user_email = $_SESSION['email'];  // Get user email from session
 
-$user_email = $_SESSION['email'];
+    // Database connection
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "void";
 
-$book_id = isset($_POST['book_id']) ? intval($_POST['book_id']) : 0;
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($book_id === 0) {
-    $response['message'] = "Invalid book ID.";
-    echo json_encode($response);
-    exit;
-}
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-// Get user id
-$query_user = "SELECT id FROM users WHERE email = ?";
-$stmt_user = $conn->prepare($query_user);
-$stmt_user->bind_param("s", $user_email);
-$stmt_user->execute();
-$result_user = $stmt_user->get_result();
+    // Get the user_id using the user_email
+    $user_query = "SELECT id FROM users WHERE email = ?";
+    $user_stmt = $conn->prepare($user_query);
+    if (!$user_stmt) {
+        die("Preparation failed: " . $conn->error);
+    }
+    $user_stmt->bind_param("s", $user_email);
+    $user_stmt->execute();
+    $user_result = $user_stmt->get_result();
 
-if ($result_user->num_rows > 0) {
-    $user_data = $result_user->fetch_assoc();
-    $user_id = $user_data['id'];
+    if ($user_result->num_rows > 0) {
+        $user = $user_result->fetch_assoc();
+        $user_id = $user['id'];
 
-    // Check if the user has borrowed the book and hasn't returned it
-    $query_borrow = "
-        SELECT * FROM borrowed_books
-        WHERE id = ? AND book_id = ? AND return_date IS NULL
-    ";
-    $stmt_borrow = $conn->prepare($query_borrow);
-    $stmt_borrow->bind_param("ii", $user_id, $book_id);
-    $stmt_borrow->execute();
-    $result_borrow = $stmt_borrow->get_result();
+        // Check if the book is borrowed by the user
+        $borrowed_query = "SELECT * FROM borrowed_books WHERE book_id = ? AND id = ?";
+        $borrowed_stmt = $conn->prepare($borrowed_query);
+        if (!$borrowed_stmt) {
+            die("Preparation failed: " . $conn->error);
+        }
+        $borrowed_stmt->bind_param("ii", $book_id, $user_id);
+        $borrowed_stmt->execute();
+        $borrowed_result = $borrowed_stmt->get_result();
 
-    if ($result_borrow->num_rows > 0) {
-        // Update return_date in borrowed_books table
-        $return_date = date("Y-m-d H:i:s");
-        $query_update_borrow = "
-            UPDATE borrowed_books
-            SET return_date = ?
-            WHERE id = ? AND book_id = ?
-        ";
-        $stmt_update_borrow = $conn->prepare($query_update_borrow);
-        if ($stmt_update_borrow) {
-            $stmt_update_borrow->bind_param("sii", $return_date, $user_id, $book_id);
-            $stmt_update_borrow->execute();
+        if ($borrowed_result->num_rows > 0) {
+            // Remove the book from borrowed_books
+            $delete_borrowed = "DELETE FROM borrowed_books WHERE book_id = ? AND id = ?";
+            $delete_stmt = $conn->prepare($delete_borrowed);
+            if (!$delete_stmt) {
+                die("Preparation failed: " . $conn->error);
+            }
+            $delete_stmt->bind_param("ii", $book_id, $user_id);
+            $delete_stmt->execute();
 
-            // Increment available_copies in books table only if the return update was successful
-            if ($stmt_update_borrow->affected_rows > 0) {
-                $query_update_book = "
-                    UPDATE books
-                    SET available_copies = available_copies + 1
-                    WHERE book_id = ?
-                ";
-                $stmt_update_book = $conn->prepare($query_update_book);
-                if ($stmt_update_book) {
-                    $stmt_update_book->bind_param("i", $book_id);
-                    $stmt_update_book->execute();
+            // Increment available copies of the book
+            $update_copies = "UPDATE books SET available_copies = available_copies + 1 WHERE book_id = ?";
+            $update_stmt = $conn->prepare($update_copies);
+            if (!$update_stmt) {
+                die("Preparation failed: " . $conn->error);
+            }
+            $update_stmt->bind_param("i", $book_id);
+            $update_stmt->execute();
 
-                    if ($stmt_update_book->affected_rows > 0) {
-                        $response['success'] = true;
-                        $response['message'] = "Book returned successfully and available copies updated.";
-                    } else {
-                        $response['message'] = "Failed to update available copies.";
-                    }
-                } else {
-                    $response['message'] = "Failed to prepare book update statement.";
+            // Check if the book is reserved
+            $reservation_query = "SELECT user_email FROM reservations WHERE book_id = ? ORDER BY reservation_date ASC LIMIT 1";
+            $reservation_stmt = $conn->prepare($reservation_query);
+            if (!$reservation_stmt) {
+                die("Preparation failed: " . $conn->error);
+            }
+            $reservation_stmt->bind_param("i", $book_id);
+            $reservation_stmt->execute();
+            $reservation_result = $reservation_stmt->get_result();
+
+            if ($reservation_result->num_rows > 0) {
+                // Get the first reserver's email
+                $reserver = $reservation_result->fetch_assoc();
+                $reserver_email = $reserver['user_email'];
+
+                // Delete the reservation for this user and book
+                $delete_reservation = "DELETE FROM reservations WHERE book_id = ? AND user_email = ?";
+                $delete_res_stmt = $conn->prepare($delete_reservation);
+                if (!$delete_res_stmt) {
+                    die("Preparation failed: " . $conn->error);
                 }
+                $delete_res_stmt->bind_param("is", $book_id, $reserver_email);
+                $delete_res_stmt->execute();
+
+                // Pass details to borrowBookB.php
+                header("Location: BorrowBookBxx.php?book_id=$book_id&user_email=$reserver_email");
+                exit();
             } else {
-                $response['message'] = "Failed to update return date.";
+                echo "Book returned successfully! No reservations.";
             }
         } else {
-            $response['message'] = "Failed to prepare return update statement.";
+            echo "You have not borrowed this book.";
         }
     } else {
-        $response['message'] = "You have not borrowed this book or you have already returned it.";
+        echo "User not found.";
     }
-} else {
-    $response['message'] = "User not found.";
+
+    $conn->close();
 }
-
-
-if (isset($stmt_user)) $stmt_user->close();
-if (isset($stmt_borrow)) $stmt_borrow->close();
-if (isset($stmt_update_borrow)) $stmt_update_borrow->close();
-if (isset($stmt_update_book)) $stmt_update_book->close();
-$conn->close();
-
-// Return the JSON response
-echo json_encode($response);
 ?>
+
+<!-- HTML form for returning a book -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Book</title>
+</head>
+<body>
+    <h1>Return Book</h1>
+    <form method="POST" action="">
+        <label for="book_id">Enter Book ID to Return:</label>
+        <input type="number" id="book_id" name="book_id" required>
+        <button type="submit" name="return">Return Book</button>
+    </form>
+</body>
+</html>
