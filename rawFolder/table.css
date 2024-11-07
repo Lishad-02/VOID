@@ -1,0 +1,67 @@
+/* Styling for the whole page */
+body {
+    background-image: url('library-background.jpg'); /* Replace with actual background */
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+}
+.page-header {
+    font-size: 25px;
+    margin-top: 20px;
+    color: rgb(25, 21, 21);
+}
+/* Button styling for selecting books */
+.button-borrow-books {
+    background-color: green;
+    color: rgb(16, 1, 1);
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bolder;
+    margin: 20px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+
+/* Container for the book list table */
+.container-book-list {
+    margin: 40px auto;
+    width: 80%;
+    background-color: black;
+    padding: 2px;
+    border-radius: 3px;
+}
+
+/* Styling for the book table */
+.table-books {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-books th, .table-books td {
+    padding: 15px;
+    border: 1px solid black;
+    text-align: left;
+}
+
+/* Styling for the table header */
+.table-books th {
+    background-color: red;
+    color: white;
+}
+
+/* Styling for the table rows */
+.table-books td {
+    background-color: grey;
+    color: black;
+    font-weight: bolder;
+}
+
+/* Styling for the checkboxes to select books */
+.table-books input[type="checkbox"] {
+    transform: scale(1.5);
+}

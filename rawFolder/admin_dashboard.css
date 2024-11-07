@@ -1,0 +1,128 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif, sans-serif;
+    background-color: black;
+    color: white;
+    background-image: url("im20.jpg"); /* Background image */
+    background-size: cover;
+    background-position: center;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+   
+}
+/* Welcome message styling */
+.welcome-message {
+    text-align: center;
+    margin-bottom: 20px; 
+}
+
+/* Username styling  */
+.welcome-message h1 {
+    font-size: 30px; 
+    color: rgb(255, 255, 255); 
+}
+
+
+.dashboard-title {
+    font-size: 46px;
+    margin-bottom: 70px;
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+/* Section for the main buttons (borrow, view borrowed) */
+.buttons-section {
+    display: flex;
+    justify-content: center;
+    gap: 40px; 
+    margin-bottom: 30px;
+}
+
+.dashboard-button {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+    border-radius: 30px;
+    padding: 15px 40px;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.dashboard-button:hover {
+    background-color: white;
+    color: black;
+}
+
+
+.logout-button {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    background-color: rgba(255, 0, 0, 0.281);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background-color: red;
+}
+
+
+/* Container for the search bar */
+.search-container {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
+
+/* Search input box styling */
+.search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    box-sizing: border-box;
+}
+
+/* Dropdown (select) styling */
+.search-select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 10px;
+    background-color: #fff;
+}
+
+/* Search button styling */
+.search-btn {
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+.search-btn:hover {
+    background-color: #333;
+}
+
+

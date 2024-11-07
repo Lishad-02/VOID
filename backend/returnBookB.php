@@ -3,6 +3,9 @@ session_start();
 
 date_default_timezone_set('Asia/Dhaka');
 
+// Variable to store message
+$message = '';
+
 // Check if the user is logged in
 if (!isset($_SESSION['email'])) {
     header("Location: login.php");
@@ -12,7 +15,7 @@ if (!isset($_SESSION['email'])) {
 // Handle the return book process
 if (isset($_POST['return'])) {
     $book_id = $_POST['book_id'];
-    $user_email = $_SESSION['email'];  // Get user email from session
+    $user_email = $_SESSION['email'];  
 
     // Database connection
     $servername = "localhost";
@@ -98,33 +101,101 @@ if (isset($_POST['return'])) {
                 header("Location: BorrowBookBxx.php?book_id=$book_id&user_email=$reserver_email");
                 exit();
             } else {
-                echo "Book returned successfully! No reservations.";
+                $message = "Book returned successfully! No reservations.";
             }
         } else {
-            echo "You have not borrowed this book.";
+            $message = "You have not borrowed this book.";
         }
     } else {
-        echo "User not found.";
+        $message = "User not found.";
     }
 
     $conn->close();
 }
 ?>
 
-<!-- HTML form for returning a book -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Return Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('99999.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        input[type="number"] {
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #ffd700;
+        }
+    </style>
 </head>
 <body>
-    <h1>Return Book</h1>
-    <form method="POST" action="">
-        <label for="book_id">Enter Book ID to Return:</label>
-        <input type="number" id="book_id" name="book_id" required>
-        <button type="submit" name="return">Return Book</button>
-    </form>
+    <div class="container">
+        <h1>Return Book</h1>
+        <form method="POST" action="">
+            <label for="book_id">Enter Book ID to Return:</label>
+            <input type="number" id="book_id" name="book_id" required>
+            <button type="submit" name="return">Return Book</button>
+        </form>
+        <?php if (!empty($message)): ?>
+            <div class="message"><?php echo $message; ?></div>
+        <?php endif; ?>
+    </div>
 </body>
 </html>
