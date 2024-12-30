@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin Wheel Game</title>
+    <link rel="stylesheet" href="spin_wheel.css">
+</head>
+<body>
+    <nav class="animated-nav">
+        <ul>
+            <li><a href="userDashboardF.php">Dashboard</a></li>
+            <li><a href="community.html">Community</a></li>
+            <li><a href="catalogue.php">Upcoming Books</a></li>
+        </ul>
+    </nav>
+
+    <div class="spin-wheel-container">
+        <div class="indicator"></div>
+        <div id="wheel" class="wheel"></div>
+        <button id="spinButton" class="spin-button" onclick="spinWheel()">Spin</button>
+        <div id="countdown" class="countdown"></div>
+    </div>
+
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <p id="rewardMessage"></p>
+            <button id="openPdfButton" style="display: none;">Open PDF</button>
+            <button id="backButton" onclick="closeModal()">Back</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-details">
+            Contact us: 01780756722 | 
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe-ol0oBsnI6Nk2XNnqDqpAF0tkp9MrhE03nK86-5o1fO28Kw/viewform?usp=sf_link" target="_blank">Give Feedback</a>
+        </div>
+    </footer>
+
+    <script src="spin_wheel.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Quotes and Footer with Logout</title>
+  <link rel="stylesheet" href="logout_page.css">
+</head>
+<body>
+
+  <!-- Book Quotes Section -->
+  <section class="quote-section">
+    <div class="quote-container">
+      <p id="quote" class="quote-text">"A room without books is like a body without a soul." - Marcus Tullius Cicero</p>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <h4 class="footer-line">Follow us here</h4>
+    <div class="footer-icons">
+      <a href="https://www.facebook.com/" target="_blank"><img src="facebook.png" alt="Facebook"></a>
+      <a href="https://github.com/" target="_blank"><img src="github.png" alt="GitHub"></a>
+      <a href="https://bd.linkedin.com/" target="_blank"><img src="linkedin-icon 1.png" alt="LinkedIn"></a>
+    </div>
+    <button id="logoutButton" class="logout-btn">Logout</button>
+    <button id="journeyButton" class="journey-btn">Our Journey</button> <!-- New Button Added -->
+  </footer>
+
+  <!-- Logout Confirmation Popup -->
+  <div id="confirmationPopup" class="popup">
+    <p>Are you sure you want to logout?</p>
+    <button id="confirmYes" class="confirm-btn">Yes</button>
+    <button id="confirmNo" class="cancel-btn">No</button>
+  </div>
+
+  <script>
+    // JavaScript for handling the logout confirmation
+    document.getElementById('logoutButton').addEventListener('click', function() {
+      document.getElementById('confirmationPopup').style.display = 'block';
+    });
+
+    document.getElementById('confirmYes').addEventListener('click', function() {
+      window.location.href = 'LandingF.php';
+    });
+
+    document.getElementById('confirmNo').addEventListener('click', function() {
+      document.getElementById('confirmationPopup').style.display = 'none';
+    });
+
+    // JavaScript for handling quote changes
+    const quotes = [
+      '"A room without books is like a body without a soul." - Marcus Tullius Cicero',
+      '"So many books, so little time." - Frank Zappa',
+      '"The only thing you absolutely have to know is the location of the library." - Albert Einstein',
+      '"Books are a uniquely portable magic." - Stephen King',
+      '"If you only read the books that everyone else is reading, you can only think what everyone else is thinking." - Haruki Murakami'
+    ];
+
+    let currentQuote = 0;
+    const quoteElement = document.getElementById('quote');
+
+    quoteElement.addEventListener('click', function() {
+      currentQuote = (currentQuote + 1) % quotes.length;
+      quoteElement.innerText = quotes[currentQuote];
+    });
+
+    // JavaScript for navigating to roadmap page
+    document.getElementById('journeyButton').addEventListener('click', function() {
+      window.location.href = 'roadmap.html';
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+/* Styling for the whole page */
+body {
+    background-image: url("//Images/library-3.jpg");
+    background-size: cover; 
+    background-position: center; 
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    margin: 0;
+    color: white; 
+}
+
+/* Container for buttons */
+.button-container {
+    text-align: center; 
+    background-color: transparent;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center; 
+    margin: 20px 0; 
+}
+
+/* Styling for buttons */
+.admin-button {
+    background-color: black; 
+    color: white;
+    padding: 15px 30px; 
+    border: 1px white;
+    border-radius: 5px;
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+    margin: 0 10px; 
+}
+
+/* Hover effect for buttons */
+.admin-button:hover {
+    background-color: green; /* Darker blue on hover */
+}

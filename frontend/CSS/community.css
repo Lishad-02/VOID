@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0c0c0c;
+    margin: 0;
+    padding: 0;
+    background-image: url("image_new.jpg");
+    background-size: cover; 
+    background-position: center; 
+    font-family: Arial, sans-serif;
+  }
+  
+  header {
+    text-align: center;
+    padding: 20px;
+    background-color: #337a86;
+    color: white;
+  }
+  
+  .community {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    padding: 20px;
+  }
+  
+  .club-card {
+    width: 300px;
+    background-color: rgba(255, 255, 255, 0.648);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .club-card h2,h3 {
+    color: #3e78b2;
+  }
+  
+  button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    background-color: #0ae912;
+    color: rgb(18, 0, 0);
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+  
+  .floating-quote-btn {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 10px;
+    background-color: #FF5733;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  footer {
+    background-color: #101010c8;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    text-decoration: none;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+.spin-btn {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    background-color: #0ae912;
+    color: rgb(18, 0, 0);
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bolder;
+    transition: background 0.3s;
+}
+
+.spin-btn:hover {
+    background-color: #0ade0d;
+}

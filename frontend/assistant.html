@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Assistance</title>
+    <link rel="stylesheet" href="assistant.css">
+</head>
+<body>
+    <!-- Dark Mode Toggle Button -->
+    <button id="darkModeToggle" class="dark-mode-btn">🌙 Dark Mode</button>
+
+    <!-- Assistant Container -->
+    <div class="assistant-container">
+        <h1>Library Assistance</h1>
+        <div class="options-container">
+            <button class="option-btn stair-btn" data-info="borrow">📚 How to Borrow Books</button>
+            <button class="option-btn stair-btn" data-info="buy">🛒 How to Buy Books</button>
+            <button class="option-btn stair-btn" data-info="prebook">📅 How to Prebook</button>
+            <button class="option-btn stair-btn" data-info="return">🔄 How to Return Books</button>
+        </div>
+        <!-- Info Box -->
+        <div id="info-box" class="info-box">
+            <h2 id="info-title"></h2>
+            <p id="info-text"></p>
+            <button id="closeBtn" class="close-btn">✖ Close</button>
+        </div>
+    </div>
+
+    <!-- Poll Section -->
+    <footer>
+        <div class="poll-container">
+            <h3>Did you find this assistant helpful?</h3>
+            <button class="poll-btn" data-answer="yes">👍 Yes</button>
+            <button class="poll-btn" data-answer="no">👎 No</button>
+            <div id="poll-feedback" class="poll-feedback">
+                <p>Thank you for your feedback!</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Code -->
+    <script>
+        // Details for each assistant option
+        const details = {
+            borrow: {
+                title: "How to Borrow Books",
+                text: "Visit the online library and select your book to borrow."
+            },
+            buy: {
+                title: "How to Buy Books",
+                text: "Browse our catalog, select your books, and complete the purchase."
+            },
+            prebook: {
+                title: "How to Prebook",
+                text: "Pre-order books from our upcoming releases section."
+            },
+            return: {
+                title: "How to Return Books",
+                text: "Return the book at the library counter within 9 days."
+            }
+        };
+
+        // Elements
+        const infoBox = document.getElementById('info-box');
+        const infoTitle = document.getElementById('info-title');
+        const infoText = document.getElementById('info-text');
+        const closeBtn = document.getElementById('closeBtn');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+
+        // Display info when option is clicked
+        document.querySelectorAll('.option-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const infoKey = button.getAttribute('data-info');
+                infoTitle.innerText = details[infoKey].title;
+                infoText.innerText = details[infoKey].text;
+                infoBox.style.display = 'block';
+            });
+        });
+
+        // Close info box
+        closeBtn.addEventListener('click', () => {
+            infoBox.style.display = 'none';
+        });
+
+        // Dark Mode Toggle
+        darkModeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+        });
+
+        // Poll Interaction
+        document.querySelectorAll('.poll-btn').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const pollFeedback = document.getElementById('poll-feedback');
+                pollFeedback.style.display = 'block';
+                const answer = event.target.getAttribute('data-answer');
+                pollFeedback.innerHTML = answer === 'no'
+                    ? `<p>We're sorry to hear that! Please leave your feedback:</p><button id="feedbackBtn">Give Feedback</button>`
+                    : `<p>Thanks for your positive feedback! 😊</p>`;
+
+                if (answer === 'no') {
+                    document.getElementById('feedbackBtn').onclick = () => {
+                        window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSe-ol0oBsnI6Nk2XNnqDqpAF0tkp9MrhE03nK86-5o1fO28Kw/viewform?usp=sf_link";
+                    };
+                }
+            });
+        });
+    </script>
+</body>
+</html>

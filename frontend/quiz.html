@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Page</title>
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz: Share Your Opinion</h1>
+        <div id="quiz-box">
+            <div id="question-container">
+                <h2 id="question">Question will be here</h2>
+                <div id="answer-buttons" class="btn-container">
+                    <!-- Buttons for answers will be created dynamically -->
+                </div>
+                <div id="timer">Time Remaining: <span id="time">20</span> seconds</div>
+            </div>
+        </div>
+        <div id="result" class="result-box" style="display:none;">
+            <h2 id="result-message"></h2>
+            <button id="backButton" class="btn">Back to Quiz</button>
+            <button id="applyButton" class="btn" style="display:none;">Submit Info for Giveaway</button>
+            <button id="communityButton" class="btn">Go to Community</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Do you like reading books?",
+                answers: [
+                    { text: "Yes", points: 1 },
+                    { text: "No", points: 0 }
+                ]
+            },
+            {
+                question: "Do you want to gain knowledge by reading books?",
+                answers: [
+                    { text: "Yes", points: 1 },
+                    { text: "No", points: 0 }
+                ]
+            },
+            {
+                question: "Do you want that getting books should be easier than before?",
+                answers: [
+                    { text: "Yes", points: 1 },
+                    { text: "No", points: 0 }
+                ]
+            },
+        ];
+
+        let currentQuestionIndex = 0;
+        let totalPoints = 0;
+        let timer;
+        const totalTime = 20;
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            totalPoints = 0;
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('quiz-box').style.display = 'block';
+            showQuestion(questions[currentQuestionIndex]);
+        }
+
+        function showQuestion(question) {
+            document.getElementById('question').innerText = question.question;
+            const answerButtons = document.getElementById('answer-buttons');
+            answerButtons.innerHTML = ''; // Clear previous answers
+            question.answers.forEach(answer => {
+                const button = document.createElement('button');
+                button.innerText = answer.text;
+                button.classList.add('btn');
+                button.addEventListener('click', () => selectAnswer(answer));
+                answerButtons.appendChild(button);
+            });
+            startTimer();
+        }
+
+        function startTimer() {
+            let timeLeft = totalTime;
+            document.getElementById('time').innerText = timeLeft;
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('time').innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    nextQuestion();
+                }
+            }, 1000);
+        }
+
+        function selectAnswer(answer) {
+            totalPoints += answer.points;
+            clearInterval(timer);
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                showQuestion(questions[currentQuestionIndex]);
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('quiz-box').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+            const resultMessage = document.getElementById('result-message');
+            const applyButton = document.getElementById('applyButton');
+            if (totalPoints >= 3) {
+                resultMessage.innerText = "Congratulations!You are eligible for free book giveaway! Apply here for getting free books giveway. If you are one og the lucky winners, our team will communicate with you!";
+                applyButton.style.display = 'inline';
+                applyButton.onclick = () => window.location.href = "https://forms.gle/Heu9Z4TVuJKDvvRC7"; // Replace with your Google Form link
+            } else {
+                resultMessage.innerText = `You scored ${totalPoints} points. Let's read books and make society great!`;
+            }
+        }
+
+        document.getElementById('backButton').addEventListener('click', startQuiz);
+        document.getElementById('communityButton').addEventListener('click', () => {
+            window.location.href = 'community.html'; // Replace with your community page link
+        });
+
+        startQuiz(); // Start the quiz when the page loads
+    </script>
+</body>
+</html>

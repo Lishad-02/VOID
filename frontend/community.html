@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Page - Book Clubs</title>
+  <link rel="stylesheet" href="community.css">
+</head>
+<body>
+
+  <header>
+    <h1>Join Our Book Community</h1>
+  </header>
+
+  <section class="community">
+    <div class="club-card">
+      <h2>Void Book Community</h2>
+      <p>Join and help us to increase our community globally!</p>
+      <button onclick="joinCommunity()">Join Community</button>
+      
+      <div class="comment-section">
+        <h3>Discussions</h3>
+        <button onclick="seePosts()">See Others' Posts</button>
+        <div id="comments">
+          <!-- User comments appear here -->
+        </div>
+        <input type="text" id="commentInput" placeholder="Add a comment...">
+        <button onclick="addComment()">Post</button>
+      </div>
+    </div>
+  </section>
+
+  <a href="logout_page.html" class="floating-quote-btn">View Quotes</a>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-content">
+      <p>Tired? let's check your luck!</p>
+        <a href="spin_wheel.html" class="spin-btn">Spin</a>
+        <a href="quiz.html" class="spin-btn">Quiz</a>
+    </div>
+  </footer>
+
+  <script>
+    function joinCommunity() {
+      alert("Welcome to the VOID community!");
+    }
+
+    function seePosts() {
+      alert("Here are the latest community posts.");
+    }
+
+    function addComment() {
+      const commentInput = document.getElementById('commentInput');
+      const commentsContainer = document.getElementById('comments');
+
+      if (commentInput.value.trim() !== "") {
+        const comment = document.createElement('p');
+        comment.classList.add('comment');
+        comment.textContent = commentInput.value;
+        commentsContainer.appendChild(comment);
+        commentInput.value = ""; // Clear the input field
+      } else {
+        alert("Please enter a comment before posting.");
+      }
+    }
+  </script>
+
+</body>
+</html>

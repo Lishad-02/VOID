@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Roadmap</title>
+    <link rel="stylesheet" href="roadmap.css">
+</head>
+<body>
+    <button id="darkModeToggle" class="dark-mode-btn">Toggle Dark Mode</button>
+    <h1>Our Learning Journey</h1>
+    <div class="roadmap-container">
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <h2>Step 1: Join the Library</h2>
+                <p>Register online to become a member and start exploring our collection.</p>
+            </div>
+        </div>
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <h2>Step 2: Explore Book Categories</h2>
+                <p>Browse through various categories, including fiction, non-fiction, academic, and self-help books.</p>
+            </div>
+        </div>
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <h2>Step 3: Borrow & Read</h2>
+                <p>Choose your favorite books, borrow them easily, and enjoy reading at your leisure.</p>
+            </div>
+        </div>
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <h2>Step 4: Give Reviews</h2>
+                <p>Share your feedback on the books you've read to help others choose their next read.</p>
+            </div>
+        </div>
+        <div class="roadmap-item left">
+            <div class="roadmap-content">
+                <h2>Step 5: Prebook Upcoming Releases</h2>
+                <p>Get early access by prebooking upcoming books from popular authors and new releases.</p>
+            </div>
+        </div>
+        <div class="roadmap-item right">
+            <div class="roadmap-content">
+                <h2>Step 6: Participate in Community Events</h2>
+                <p>Join our community events like book clubs, author meets, and workshops to enhance your experience.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <a href="assistant.html" class="assistant-btn">Go to Assistant</a>
+    </div>
+
+    <script>
+        document.getElementById("darkModeToggle").addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+        });
+    </script>
+</body>
+</html>

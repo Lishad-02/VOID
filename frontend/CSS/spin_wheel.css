@@ -1,0 +1,148 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("999.jpg");
+}
+
+.animated-nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #33ccd7;
+}
+
+.animated-nav li {
+    margin: 0 15px;
+}
+
+.animated-nav a {
+    color: rgb(15, 14, 14);
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    font-weight: bolder;
+}
+
+.animated-nav a:hover {
+    background-color: #fcfcfc;
+}
+
+.spin-wheel-container {
+    position: relative;
+    margin: 50px auto;
+    width: 300px;
+    height: 300px;
+}
+
+.indicator {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid red;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.wheel {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    transition: transform 4s ease-out;
+    background: conic-gradient(
+        green 0deg 30deg,
+        yellow 30deg 60deg,
+        blue 60deg 90deg,
+        green 90deg 120deg,
+        orange 120deg 150deg,
+        red 150deg 180deg,
+        yellow 180deg 210deg,
+        blue 210deg 240deg,
+        green 240deg 270deg,
+        orange 270deg 300deg,
+        red 300deg 330deg,
+        yellow 330deg 360deg
+    );
+}
+
+.spin-button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: red;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bolder;
+    transition: background 0.3s;
+}
+
+.spin-button:hover {
+    background-color:green;
+}
+
+.countdown {
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    margin-top: 10px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #0e0d0df2;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#openPdfButton {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#backButton {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#backButton:hover {
+    background-color: #555;
+}
+
+.footer-details {
+    text-align: right;
+    padding: 10px;
+    background-color: #0f0f0ff0;
+    color: #fff;
+    text-decoration: none;
+}

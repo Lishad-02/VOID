@@ -1,0 +1,122 @@
+/* Basic styling for the body */
+body {
+  background-color: black;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* Quote Section Styling */
+.quote-section {
+  text-align: center;
+  padding: 50px 20px;
+  background-image: url('image-7.jpg');
+}
+
+.quote-container {
+  display: inline-block;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  width: 400px;
+  margin: 0;
+}
+
+.quote-text {
+  font-size: 28px;
+  color: white;
+  font-style: italic;
+  transition: color 0.3s ease;
+}
+
+.quote-container:hover .quote-text {
+  color: #d9534f;
+}
+
+/* Footer Styling */
+footer {
+  margin-bottom: 0;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.708);
+  color: white;
+  background-image: url('/Images/image-4.jpg');
+  text-align: right;
+  height: 150px;
+}
+
+.footer-line {
+  margin-bottom: 15px;
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+.footer-icons a img {
+  width: 30px;
+  margin: 2px;
+  margin-bottom: 15px;
+}
+
+.logout-btn, .journey-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #de6713;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bolder;
+  border-radius: 5px;
+  text-align: left;
+}
+
+/* Hover Effect for Buttons */
+.logout-btn:hover, .journey-btn:hover {
+  background-color: #c9302c;
+}
+
+/* Popup Styling */
+.popup {
+  display: none;
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 40px;
+  text-align: center;
+  z-index: 1000;
+}
+
+.confirm-btn, .cancel-btn {
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.confirm-btn {
+  background-color: #08fa08;
+  color: #0f0101;
+}
+
+.cancel-btn {
+  background-color: #ed0e06;
+  color: #fff;
+}
+
+/* Journey Button Styling */
+.journey-btn {
+  margin-left: 15px;
+  background-color: #007BFF;
+}
+
+.journey-btn:hover {
+  background-color: #0056b3;
+}

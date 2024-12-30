@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Poll</title>
+<link rel="stylesheet" href="css/poll.css">
+</head>
+<body>
+  <section class="poll-section">
+    <h2>Do you enjoy our platform?</h2>
+    <button onclick="vote('yes')">Yes</button>
+    <button onclick="vote('no')">No</button>
+    <p id="result"></p>
+  </section>
+
+  <script>
+    function vote(answer) {
+      const result = document.getElementById('result');
+      if (answer === 'yes') {
+        result.textContent = "Thank you for your positive feedback!";
+      } else {
+        result.textContent = "We appreciate your honesty. We'll strive to improve.";
+      }
+    }
+  </script>
+</body>
+</html>
